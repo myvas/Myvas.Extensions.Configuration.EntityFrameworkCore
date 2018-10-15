@@ -1,0 +1,2 @@
+# Myvas.Extensions.Configuration.EntityFrameworkCore
+EntityFrameworkCore configuration provider implementation for Microsoft.Extensions.Configuration.
