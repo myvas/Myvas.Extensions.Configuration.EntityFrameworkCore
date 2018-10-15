@@ -1,0 +1,73 @@
+﻿@model List<ConfigurationValue>
+
+@{
+    Layout = "_LayoutSui";
+    ViewData["Title"] = "配置参数";
+}
+
+
+<!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
+<div class="page-group">
+    <!-- 单个page ,第一个.page默认被展示-->
+    <div class="page">
+        <!-- 标题栏 -->
+        <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left" data-transition="slide-out" href="@(Url.Action(nameof(EfConfigController.Index)))">
+                <span class="icon icon-left">返回列表</span>
+            </a>
+            <h1 class="title">@ViewData["Title"]</h1>
+            <a class="icon icon-me pull-right open-panel"></a>
+        </header>
+
+        <div class="bar bar-header-secondary">
+            <form method="post">
+                <div class="searchbar">
+                    <a class="searchbar-cancel">取消</a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="q"></label>
+                        <input type="search" name='q' value='@ViewData["q"]' placeholder='输入搜索内容...' />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="content">
+            <div class="list-block">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">@Html.DisplayFor(modelItem => item.Key) <a asp-action="Delete" asp-route-id="@item.Key"><span class="glyphicon glyphicon-remove-circle"></span></a></div>
+                                <div class="item-after">
+                                    <a href="#" data-type="text" data-pk="@item.Key" data-url="@(Url.Action(nameof(EfConfigController.PutConfigValue)))" data-title="请输入参数[@item.Key]的值：" class="editable editable-click edit-kv">@item.Value</a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    }
+    <script>
+        $(document).ready(function () {
+            $('.value-x').editable({
+                //mode: 'inline',
+                params: function (params) {
+                    return JSON.stringify({ Key: params.pk, Value: params.value });
+                },
+                ajaxOptions: {
+                    type: 'put',
+                    contentType: 'application/json',
+                    dataType: 'json'
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Myvas.Extensions.Configuration.EntityFrameworkCore.All</AssemblyName>
+    <RootNamespace>Myvas.Extensions.Configuration.EntityFrameworkCore.All</RootNamespace>
+    
+    <PackageId>Myvas.Extensions.Configuration.EntityFrameworkCore.All</PackageId>
+    <Description>A EntityFrameworkCore configuration provider using DbContext.</Description>
+    <PackageTags>configuration;entityframeworkcore;ConfigDbContext;Myvas</PackageTags>
+    <Authors>Myvas</Authors>
+    <Product>Myvas.Extensions.Configuration.EntityFrameworkCore</Product>
+    <Version>2.0.1-alpha-81015</Version>
+
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeReferencedProjectInPackage</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\EfConfig.UI\EfConfig.UI.csproj">
+      <PrivateAssets>All</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+  
+  <Target Name="IncludeReferencedProjectInPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutputPath)Myvas.Extensions.Configuration.EntityFrameworkCore.UI.dll" />
+      <BuildOutputInPackage Include="$(OutputPath)Myvas.Extensions.Configuration.EntityFrameworkCore.dll" />
+    </ItemGroup>
+  </Target>
+
+</Project>

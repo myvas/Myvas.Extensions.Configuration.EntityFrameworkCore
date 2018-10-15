@@ -1,0 +1,64 @@
+﻿@model List<ConfigurationValue>
+
+@{
+    ViewData["Title"] = "配置参数";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="搜索内容" aria-label="搜索内容" />
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-info" title="快捷键为：回车键(Enter)"><i class="glyphicon glyphicon-search"></i></button>
+        </span>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><a asp-action="Create"><span class="glyphicon glyphicon-plus-sign"></span></a></th>
+            <th>
+                参数名
+            </th>
+            <th>
+                配置值
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a asp-action="Delete" asp-route-id="@item.Key"><span class="glyphicon glyphicon-remove-circle"></span></a></td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key)
+                </td>
+                <td>
+                    <a href="#" data-type="text" data-pk="@item.Key" data-url="@(Url.Action(nameof(EfConfigController.PutConfigValue)))" data-title="请输入参数[@item.Key]的值：" class="editable editable-click edit-kv">@item.Value</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @{
+    }
+    <script>
+        $(document).ready(function () {
+            $('.value-x').editable({
+                //mode: 'inline',
+                params: function (params) {
+                    return JSON.stringify({ Key: params.pk, Value: params.value });
+                },
+                ajaxOptions: {
+                    type: 'put',
+                    contentType:'application/json',
+                    dataType: 'json'
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Myvas.Extensions.Configuration.EntityFrameworkCore.UI</RootNamespace>
+    <AssemblyName>Myvas.Extensions.Configuration.EntityFrameworkCore.UI</AssemblyName>
+
+    <PackageId>Myvas.Extensions.Configuration.EntityFrameworkCore.UI</PackageId>
+    <Description>A EntityFrameworkCore configuration provider using DbContext.</Description>
+    <PackageTags>configuration;entityframeworkcore;ConfigDbContext;Myvas;Razor UI</PackageTags>
+    <Authors>Myvas</Authors>
+    <Product>Myvas.Extensions.Configuration.EntityFrameworkCore</Product>
+    <Version>2.0.1-alpha-81015</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EfConfig\EfConfig.csproj" />
+  </ItemGroup>
+</Project>
